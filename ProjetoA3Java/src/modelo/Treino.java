@@ -10,9 +10,10 @@ public class Treino extends Pessoa{
     private int duracao;
     private ArrayList<Professor> professores;
     private ArrayList<Aluno> alunos;
-    
+
     public Treino(String nome, Date dataNascimento, int idade, int cpf, String email, String endereco, String celular,
-            String dias, String horario, String descricao, int duracao, ArrayList<Professor> professores, ArrayList<Aluno> alunos) {
+            String dias, String horario, String descricao, int duracao, ArrayList<Professor> professores,
+            ArrayList<Aluno> alunos) {
         super(nome, dataNascimento, idade, cpf, email, endereco, celular);
         this.dias = dias;
         this.horario = horario;
@@ -21,15 +22,36 @@ public class Treino extends Pessoa{
         this.professores = professores;
         this.alunos = alunos;
     }
+
     @Override
     public void imprimirDados() {
         
     }
 
     public void adicionarAluno(Aluno aluno) { 
-        alunos.add(aluno); }
-        public void adicionarProfessor(Professor professor) { 
-            professores.add(professor); }
+        Treino treino = new Treino(descricao, dataNascimento, duracao, duracao, descricao, descricao, descricao, dias, horario, descricao, duracao, professores, alunos);
+        if("Ativo".equals(aluno.getSituacaoPlano())){
+            aluno.imprimirDados();
+            alunos.add(aluno); 
+            treino.adicionarAluno(aluno);
+            treino.imprimirDados();
+        }else{
+            aluno.renovarMatricula();
+            System.out.println();
+            aluno.imprimirDados();
+        }
+    }
+        public void adicionarProfessor(Professor professor){
+            Treino treino = new Treino(descricao, dataNascimento, duracao, duracao, descricao, descricao, descricao, dias, horario, descricao, duracao, professores, alunos);
+            if("Ativo".equals(professor.getSituacao())){
+                professor.imprimirDados();
+                professores.add(professor); 
+                treino.adicionarProfessor(professor);
+                treino.imprimirDados();
+            }else{
+            System.out.println("Professor Inativo!!");    
+            }
+        }
 
     public String getDias() {
         return dias;
@@ -62,20 +84,16 @@ public class Treino extends Pessoa{
     public void setDuracao(int duracao) {
         this.duracao = duracao;
     }
-
+           public ArrayList<Aluno> getAlunos() {
+        return alunos;
+    }     
+    public void setAlunos(ArrayList<Aluno> alunos) {
+        this.alunos = alunos;
+    }
     public ArrayList<Professor> getProfessores() {
         return professores;
     }
     public void setProfessores(ArrayList<Professor> professores) {
         this.professores = professores;
     }
-
-    public ArrayList<Aluno> getAlunos() {
-        return alunos;
     }
-
-    public void setAlunos(ArrayList<Aluno> alunos) {
-        this.alunos = alunos;
-    }
-    
-}

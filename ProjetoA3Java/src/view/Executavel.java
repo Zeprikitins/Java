@@ -1,34 +1,82 @@
 package view;
-
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
 import javax.swing.JOptionPane;
-
 import modelo.Aluno;
 import modelo.Professor;
+import modelo.Treino;
 
 
 public class Executavel{
 public static void main(String[] args) {
-    Calendar cal = Calendar.getInstance();
-        cal.set(2015, Calendar.JANUARY, 15);
-        Date dataNascimentoAluno1 = cal.getTime();
-    Aluno aluno1 = new Aluno("Isis", dataNascimentoAluno1, 15, 1000000000, "ajsdgakijbdakjsdb", "iouagdjabjkbsd", "999999999", 1, "Presente");
-        cal.set(2000, Calendar.MARCH, 15);
-        Date dataNascimentoProf1 = cal.getTime();
-    Professor professor1 = new Professor("Gabriela", dataNascimentoProf1, 24, 00000000000, "jabkjbdfjbfjbd", "jkljlkfhklasfaksf", "jghajdlajkhdlka", 1, "Musculacao", 1220, "Ativo");
+    ArrayList<Professor> professores = new ArrayList<>();
+  ArrayList<Aluno> alunos = new ArrayList<>();
+  Calendar c = Calendar.getInstance();
+
+  Treino treino = new Treino(null, null, 0, 0, null, null, null, null, null, null, 0, professores, alunos);
+
+  for(int i = 0; i < 1; i++){
+    JOptionPane.showMessageDialog(null, "Professor: " + (i+1));
+    int idProfessor = Integer.parseInt(JOptionPane.showInputDialog("Id do professor: "));
+    String especialidade = JOptionPane.showInputDialog("Especialidade: ");
+    double salario = Double.parseDouble(JOptionPane.showInputDialog("Salário: "));
+    String situacao = JOptionPane.showInputDialog("Situação: ");
+    String nome = JOptionPane.showInputDialog("Nome: ");
     
-      String[] primeiraOpcoes = {"Renovar Matrícula", "Ver Dados"};  int escolhaInicial = JOptionPane.showOptionDialog( null, "Escolha uma opção:", "Opções Iniciais", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, primeiraOpcoes,  primeiraOpcoes[0]); 
-      if (escolhaInicial == 0) {  String[] renovarOpcoes = {"Confirmar Renovação", "Cancelar Renovação"};  int escolhaRenovar = JOptionPane.showOptionDialog( null, "Escolha uma opção:",  "Opções de Renovação", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, renovarOpcoes,  renovarOpcoes[0] ); 
-       if (escolhaRenovar == 0) { aluno1.renovarMatricula(); } 
-       else if (escolhaRenovar == 1) { System.out.println("Você escolheu cancelar a renovação da matrícula."); } 
-       else { System.out.println("Nenhuma opção foi escolhida."); } } else if (escolhaInicial == 1) { String[] verDadosOpcoes = {"Ver Dados Pessoais", "Ver Dados Acadêmicos"};  int escolhaVerDados = JOptionPane.showOptionDialog( null, "Escolha uma opção:", "Opções de Dados", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,  verDadosOpcoes,  verDadosOpcoes[0] ); 
-      if (escolhaVerDados == 0) { aluno1.imprimirDados(); } 
-       else if (escolhaVerDados == 1) { aluno1.getSituacaoPlano();} 
-      else { System.out.println("Nenhuma opção foi escolhida."); } } else { System.out.println("Nenhuma opção foi escolhida."); }
+    int ano = Integer.parseInt(JOptionPane.showInputDialog("Data de Nascimento(Ano): "));
+    int mes = Integer.parseInt(JOptionPane.showInputDialog("Data de Nascimento(mes): "));
+    int dia = Integer.parseInt(JOptionPane.showInputDialog("Data de Nascimento(dia): "));
+    int cpf = Integer.parseInt(JOptionPane.showInputDialog("CPF: "));
+    String email = JOptionPane.showInputDialog("Email: ");
+    String endereco = JOptionPane.showInputDialog("Endereço: ");
+    String numero = JOptionPane.showInputDialog("Número: ");
+
+    c.set(ano, mes - 1, dia);
+    Date dataNascimentoProfessor = c.getTime();
+
+    Professor professor = new Professor(nome, dataNascimentoProfessor, i, cpf, email, endereco, numero, idProfessor, especialidade, salario, situacao);
+    professores.add(professor);
+  }
+  for(int i = 0; i < 1; i++){
+    JOptionPane.showMessageDialog(null, "Aluno: " + (i+1));
+    int matricula = Integer.parseInt(JOptionPane.showInputDialog("Matrícula do Aluno: "));
+    String situacao = JOptionPane.showInputDialog("Situação: ");
+    String nome = JOptionPane.showInputDialog("Nome: ");
+    
+    int ano = Integer.parseInt(JOptionPane.showInputDialog("Data de Nascimento(Ano): "));
+    int mes = Integer.parseInt(JOptionPane.showInputDialog("Data de Nascimento(mes): "));
+    int dia = Integer.parseInt(JOptionPane.showInputDialog("Data de Nascimento(dia): "));
+    int cpf = Integer.parseInt(JOptionPane.showInputDialog("CPF: "));
+    String email = JOptionPane.showInputDialog("Email: ");
+    String endereco = JOptionPane.showInputDialog("Endereço: ");
+    String numero = JOptionPane.showInputDialog("Número: ");
+
+c.set(ano, mes, dia);
+Date dataNascimentoAluno = c.getTime();
+
+    Aluno aluno = new Aluno(nome, dataNascimentoAluno, i, cpf, email, endereco, numero, matricula, situacao);
+    System.out.println();
+    alunos.add(aluno);
+}
+
+System.out.println();
+
+System.out.println("\nDados do Professor: ");
+for(Professor professor : professores){
+    professor.calcularIdade();
+    professor.imprimirDados();
+}
+System.out.println();
+
+System.out.println("Dados do Aluno: ");
+for(Aluno aluno : alunos){
+    aluno.calcularIdade();
+    aluno.imprimirDados();
     
 }
 }
+}
+
 
 

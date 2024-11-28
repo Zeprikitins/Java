@@ -9,7 +9,7 @@ import java.util.Date;
 public abstract class Pessoa {
     //atributos
     private String nome;
-    private Date dataNascimento;
+    public Date dataNascimento;
     private int idade;
     private int cpf = 11;
     private String email;
