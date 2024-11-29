@@ -25,16 +25,28 @@ public class Treino extends Pessoa{
 
     @Override
     public void imprimirDados() {
-        
+        System.out.println("Treino: ");
+        System.out.println("Dias: " + dias);
+        System.out.println("Horário: " + horario);
+        System.out.println("Descrição: " + descricao);
+        System.out.println("Duração: " + duracao);
+        System.out.println();
+        System.out.println("Professores: ");
+        for(Professor professor : professores){
+            professor.imprimirDados();
+        }
+        System.out.println();
+        System.out.println("Alunos: ");
+        for(Aluno aluno : alunos){
+            aluno.imprimirDados();
+        }
     }
 
     public void adicionarAluno(Aluno aluno) { 
-        Treino treino = new Treino(descricao, dataNascimento, duracao, duracao, descricao, descricao, descricao, dias, horario, descricao, duracao, professores, alunos);
+        
         if("Ativo".equals(aluno.getSituacaoPlano())){
-            aluno.imprimirDados();
-            alunos.add(aluno); 
-            treino.adicionarAluno(aluno);
-            treino.imprimirDados();
+          alunos.add(aluno);
+          System.out.println("Aluno adicionado: " + aluno.getNome());
         }else{
             aluno.renovarMatricula();
             System.out.println();
@@ -42,12 +54,9 @@ public class Treino extends Pessoa{
         }
     }
         public void adicionarProfessor(Professor professor){
-            Treino treino = new Treino(descricao, dataNascimento, duracao, duracao, descricao, descricao, descricao, dias, horario, descricao, duracao, professores, alunos);
             if("Ativo".equals(professor.getSituacao())){
-                professor.imprimirDados();
                 professores.add(professor); 
-                treino.adicionarProfessor(professor);
-                treino.imprimirDados();
+                System.out.println("Professor adicionado: " + professor.getNome());
             }else{
             System.out.println("Professor Inativo!!");    
             }
